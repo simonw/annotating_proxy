@@ -81,7 +81,7 @@ function display_annotations(ev, selector) {
     if (!div.length) {
         div = $('<div id="annotationsDiv"></div>').css({
             'position': 'absolute',
-            'width': '300px',
+            'width': '350px',
             'background-color': '#ddd',
             'border': '1px solid #aaa',
             'padding': '5px',
