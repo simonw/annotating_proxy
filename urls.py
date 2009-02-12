@@ -19,6 +19,6 @@ urlpatterns = patterns('',
         'base_url': 'http://diveintopython3.org/',
         'annotations_selector': ':header[id]',
         #'base_url': 'http://localhost/',
-        #'annotations_selector': 'td a',
+        #'annotations_selector': 'td has(a)',
     }),
 )
