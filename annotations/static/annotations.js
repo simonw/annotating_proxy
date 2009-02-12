@@ -75,7 +75,7 @@ function getSelectorForElement(el, suffix) {
 
 function display_annotations(ev, selector) {
     var $ = jQuery;
-    var annotations = window.annotations_json.selector || [];
+    var annotations = window.annotations_json[selector] || [];
     // Show them in a div at that point on the page
     var div = $('div#annotationsDiv');
     if (!div.length) {
