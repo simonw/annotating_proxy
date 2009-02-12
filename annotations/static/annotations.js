@@ -149,12 +149,15 @@ function display_annotations(ev, selector) {
         });
         return false;
     });
-    var match = (/annotation-name=([^;]+)/).exec(document.cookie);
-    if (match) {
-        form.find(':text:first').val(match[1]);
-    }
     div.find('*').css('float', 'none');
     div.show();
+    var match = (/annotation-name=([^;]+)/).exec(document.cookie);
+    if (match && match[1]) {
+        form.find(':text:first').val(match[1]);
+        form.find('textarea').focus();
+    } else {
+        form.find(':text:first').focus();
+    }
 }
 
 if (!window.jQuery) {
