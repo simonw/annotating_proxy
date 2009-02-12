@@ -1,5 +1,3 @@
-
-
 function add_annotations() {
     var $ = jQuery;
     var annotation_link_css = {
@@ -48,14 +46,28 @@ function add_annotations() {
     });
 }
 
-function getSelectorForElement(el) {
+function getSelectorForElement(el, suffix) {
+    var $ = jQuery;
+    suffix = suffix || '';
     if (el.attr('id')) {
-        return '#' + el.attr('id');
+        return $.trim('#' + el.attr('id') + (suffix ? (' ' + suffix) : ''));
+    } else if (el.is('body') || el.parent().length == 0) {
+        return $.trim(suffix);
     }
-    throw "No ID on this element!"
+    else {
+        var tag = el[0].tagName.toLowerCase();
+        var position = el.parent().children(tag).index(el);
+        var relative_selector = tag + ':eq(' + position + ')';
+        return $.trim(
+            getSelectorForElement(
+                el.parent(), relative_selector + ' ' + suffix
+            )
+        );
+    }
 }
 
 function display_annotations(ev, selector, annotations) {
+    var $ = jQuery;
     // Show them in a div at that point on the page
     var div = $('div#annotationsDiv');
     if (!div.length) {
