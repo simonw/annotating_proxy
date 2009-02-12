@@ -74,8 +74,8 @@ function display_annotations(ev, selector, annotations) {
         div = $('<div id="annotationsDiv"></div>').css({
             'position': 'absolute',
             'width': '300px',
-            'background-color': '#ccc',
-            'border': '1px solid black',
+            'background-color': '#ddd',
+            'border': '1px solid #aaa',
             'padding': '5px',
             'top': '0',
             'left': '0'
