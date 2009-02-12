@@ -127,9 +127,32 @@ function display_annotations(ev, selector) {
         'width': '98%'
     }).end().appendTo(div);
     form.submit(function() {
-        // Hook up the Ajax
-        
+        document.cookie = 'annotation-name=' + form.find(':text:first').val();
+        $.post(form.attr('action'), form.serialize(), function(data) {
+            data = $.trim(data);
+            if (data == 'ok') {
+                form.find('div.error').remove();
+                add_annotations(); // To refresh the counters
+                div.hide();
+            } else {
+                var error = data.replace('error: ', '');
+                var errorDiv = form.find('div.e');
+                if (!errorDiv.length) {
+                    form.prepend($('<div class="e">' + error + '</div>').css({
+                        'background-color': 'red',
+                        'padding': '2px'
+                    }));
+                } else {
+                    errorDiv.text(error);
+                }
+            }
+        });
+        return false;
     });
+    var match = (/annotation-name=([^;]+)/).exec(document.cookie);
+    if (match) {
+        form.find(':text:first').val(match[1]);
+    }
     div.find('*').css('float', 'none');
     div.show();
 }

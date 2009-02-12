@@ -40,4 +40,6 @@ def add(request):
             url = url,
             author = author,
         )
-    return HttpResponseRedirect(url)
+        return HttpResponse('ok')
+    else:
+        return HttpResponse('error: fields are required')
