@@ -1,4 +1,5 @@
 function add_annotations() {
+    // This function can safely be called multiple times to update counters
     var $ = jQuery;
     var annotation_link_css = {
         'font-family': 'courier',
@@ -16,27 +17,33 @@ function add_annotations() {
     $.getJSON(url, function(json) {
         window.annotations_json = json.sections;
         $.each(json.sections, function(selector, annotations) {
-            var a = $('<a href="#">[' + annotations.length + ']</a>').css(
-                annotation_link_css
-            );
-            a.click(function(ev) {
-                display_annotations(ev, selector, annotations);
-                return false;
-            })
-            $(selector).append(' ');
-            $(selector).append(a);
-            $(selector).data('has-annotations', 1);
+            var section = $(selector);
+            var count = annotations.length;
+            if (section.find('a.annotations-link').length) {
+                // Update existing link with accurate number
+                section.find('a.annotations-link').text('[' + count + ']');
+            } else {
+                var a = $(
+                    '<a class="annotations-link" href="#">[' + count + ']</a>'
+                ).css(annotation_link_css);
+                a.click(function(ev) {
+                    display_annotations(ev, selector);
+                    return false;
+                })
+                $(selector).append(' ');
+                $(selector).append(a);
+            }
         });
         // Now add empty annotation links
         $(annotations_selector).each(function() {
             var section = $(this);
-            if (!section.data('has-annotations')) {
-                var a = $('<a href="#">[#]</a>').css(
+            if (!section.find('a.annotations-link').length) {
+                var a = $('<a class="annotations-link" href="#">[#]</a>').css(
                     annotation_link_css
                 );
                 var selector = getSelectorForElement(section);
                 a.click(function(ev) {
-                    display_annotations(ev, selector, []);
+                    display_annotations(ev, selector);
                     return false;
                 })
                 section.append(' ');
@@ -66,8 +73,9 @@ function getSelectorForElement(el, suffix) {
     }
 }
 
-function display_annotations(ev, selector, annotations) {
+function display_annotations(ev, selector) {
     var $ = jQuery;
+    var annotations = window.annotations_json.selector || [];
     // Show them in a div at that point on the page
     var div = $('div#annotationsDiv');
     if (!div.length) {
@@ -118,6 +126,10 @@ function display_annotations(ev, selector, annotations) {
     ].join('\n')).find(':text,textarea').css({
         'width': '98%'
     }).end().appendTo(div);
+    form.submit(function() {
+        // Hook up the Ajax
+        
+    });
     div.find('*').css('float', 'none');
     div.show();
 }
