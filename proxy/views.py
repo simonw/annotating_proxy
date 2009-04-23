@@ -29,6 +29,7 @@ def proxy(request, request_path, base_url, annotations_selector):
         extra = '\n'.join([
             '<script type="text/javascript">',
             "var annotations_selector = '%s';" % annotations_selector,
+            "var annotations_base_url = '%s';" % base_url,
             '</script>',
             '<script type="text/javascript" src="%s"></script>' % SCRIPT
         ])
