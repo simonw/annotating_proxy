@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^annotations/$', annotations.index),
     (r'^annotations/add/$', annotations.add),
     (r'^annotations/recent/$', annotations.recent),
+    (r'^annotations/recent/atom/$', annotations.recent_atom),
     (r'^annotations/static/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': os.path.join(
             os.path.dirname(__file__), 'annotations/static'

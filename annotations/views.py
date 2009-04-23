@@ -50,3 +50,29 @@ def recent(request):
         'annotations': Annotation.objects.all().order_by('-created')[0:50],
     })
 
+from django.contrib.syndication.feeds import Feed
+from django.utils.feedgenerator import Atom1Feed
+
+class RecentAnnotations(Feed):
+    title = "Recent annotations on diveintopython3"
+    link = "http://annotated-dip3.simonwillison.com/"
+    description = title
+    feed_type = Atom1Feed
+    description_template = 'annotations/feed_item.html'
+    
+    def items(self):
+        return Annotation.objects.all().order_by('-created')[0:30]
+    
+    def item_link(self, obj):
+        return obj.url + obj.selector
+    
+    def item_description(self, obj):
+        return obj.body
+
+    def item_pubdate(self, obj):
+        return obj.created
+
+def recent_atom(request):
+    feed = RecentAnnotations('recent', request).get_feed()
+    return HttpResponse(feed.writeString('utf8'), content_type = 'application/xml')
+
