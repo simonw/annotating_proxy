@@ -1,6 +1,18 @@
 function add_annotations() {
     // This function can safely be called multiple times to update counters
     var $ = jQuery;
+    if (!$('#annotation-warning').length) {
+        var original = annotations_base_url.slice(0, -1) + location.pathname;
+        $('<div id="annotation-warning"></div>').css({
+            'background-color': 'red',
+            'color': 'white',
+            'padding': '5px'
+        }).html(
+            'This is an annotated copy of <a href="' + original + 
+            '">' + original + '</a>'
+        ).prependTo(document.body).find('a').css('color', 'white');
+    }
+
     var annotation_link_css = {
         'font-family': 'courier',
         'font-size': '12px',
