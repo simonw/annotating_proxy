@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response
 from django.utils import simplejson
 import itertools, cgi
 
@@ -43,3 +44,9 @@ def add(request):
         return HttpResponse('ok')
     else:
         return HttpResponse('error: fields are required')
+
+def recent(request):
+    return render_to_response('annotations/recent.html', {
+        'annotations': Annotation.objects.all().order_by('-created')[0:50],
+    })
+

@@ -1,0 +1,20 @@
+<!DOCTYPE html><head><meta charset="utf-8"><title>Recent annotations</title>
+<style type="text/css">
+div {
+  border-bottom: 1px solid #666;
+}
+</style>
+</head>
+<body>
+<h1>Recent annotations</h3>
+
+{% for a in annotations %}
+<div>
+<p><strong>{{ a.author }}</strong> on <a href="{{ a.url }}{{ a.selector }}">{{ a.url }}{{ a.selector }}</a></p>
+{{ a.body|linebreaks }}
+<p>{{ a.created|date:"jS F Y H:i" }}</p>
+</div>
+{% endfor %}
+</body>
+</html>
+
