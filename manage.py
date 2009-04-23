@@ -1,4 +1,15 @@
 #!/usr/bin/env python
+
+import sys
+paths = (
+    '/home/simon/sites/annotated-dip3.simonwillison.com',
+    '/home/simon/sites/annotated-dip3.simonwillison.com/annotated_dip3',
+    '/home/simon/pythonmods',
+)
+for path in paths:
+    if not path in sys.path:
+        sys.path.insert(0, path)
+
 from django.core.management import execute_manager
 try:
     import settings # Assumed to be in the same directory.
