@@ -54,8 +54,8 @@ from django.contrib.syndication.feeds import Feed
 from django.utils.feedgenerator import Atom1Feed
 
 class RecentAnnotations(Feed):
-    title = "Recent annotations on diveintopython3"
-    link = "http://annotated-dip3.simonwillison.com/"
+    title = "Recent annotations"
+    link = "http://example.com/"
     description = title
     feed_type = Atom1Feed
     description_template = 'annotations/feed_item.html'

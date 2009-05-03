@@ -9,9 +9,9 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'annotated_dip3'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'annotated_dip3'             # Not used with sqlite3.
+DATABASE_ENGINE = 'mysql'
+DATABASE_NAME = 'annotating_proxy'
+DATABASE_USER = 'root'
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = 'localhost'             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = '3393'             # Set to empty string for default. Not used with sqlite3.
@@ -48,7 +48,7 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '=h#9&7f(_o58nj29)@y)j0nqc)1#xg+=6t1#*y%_6qtd@a^+ii'
+SECRET_KEY = 'SECRET-GOES-HERE'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
